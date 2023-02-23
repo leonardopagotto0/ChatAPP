@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/Chat.css">
+    <link rel="stylesheet" href="/public/css/alert.css">
+    <title>ChatApp</title>
+</head>
+<body>
+    <div class="alert-div">
+        <div class="alert-container" id="alert-space">
+            <!-- <div class="alert-content">
+                <img src="public/img/warning.png" alt="">
+                <span>Erro ao enviar solicitação!</span>
+                <input type="submit" value="x">
+            </div>
+            <div class="timer"></div> -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="chat-frame">
+            <div class="chat-nav">
+                <div class="chat-nav-content">
+                    <div class="logo-div">
+                        <img src="/public/img/cat-logo.png" alt="">
+                    </div>
+                    <div class="navbar">
+                        <button class="nav-opts" id="chatListBtn">CHATS</button>      
+                        <button class="nav-opts" id="requestsListBtn">REQUESTS</button>
+                        <button class="nav-opts" id="setingsListBtn">SETINGS</button>
+                    </div>
+                    <div class="contacts">
+                        
+                        <div class="content contentSelected" id="chatList">
+                            {{#each chats}}
+                                <div class="contact" id="{{id}}">
+                                    <img src="/public/img/{{photo}}.png" alt="">
+                                    <span>{{name}}</span>
+                                </div>
+                            {{/each}}
+                        </div>
+
+                        <div class="content" id="requestsList">
+                            <div class="add-user">
+                                <input type="text" id="request-username" placeholder="Username">
+                                <input type="submit" value="ADD" id="sendRequest">
+                            </div>
+
+                            <div class="request-session">
+                                <span>Received</span>
+                                <div class="request-session-content" id="requestReceived">
+                                    {{#each requests}}
+                                        {{#ifDifferent from ../user.username}}
+                                            <div class="request">
+                                                <div class="req-data">
+                                                    <img src="/public/img/{{photoFrom}}.png" alt="">
+                                                    <span>{{from}}</span>
+                                                </div>
+                                                <div class="opts">
+                                                    <input type="submit" value="ACCEPT" class="req-btn" id="{{id}}">
+                                                    <input type="submit" value="REJECT" class="req-btn" id="{{id}}">
+                                                </div>
+                                            </div>
+                                        {{else}}
+                                        <span style="color:  white;">-</span>
+                                        {{/ifDifferent}}
+                                        {{else}}
+                                        <span style="color:  white;">-</span>
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                            <div class="request-session">
+                                <span>Sent</span>
+                                <div class="request-session-content" id="requestSent">
+                                    {{#each requests}}
+                                        {{#ifEqual from ../user.username}}
+                                            <div class="request">
+                                                <div class="req-data">
+                                                    <img src="/public/img/{{photoUsername}}.png" alt="">
+                                                    <span>{{username}}</span>
+                                                </div>
+                                                <div class="opts">
+                                                    <input type="submit" value="CANCEL" id="{{id}}" class="cancel-request-btn">
+                                                </div>
+                                            </div>
+                                            {{else}}
+                                            <span style="color:  white;">-</span>
+                                        {{/ifEqual}}
+                                        {{else}}
+                                            <span style="color:  white;">-</span>
+                                    {{/each}}
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="foot-wheel">
+                    <div class="user">
+                        <img id="photo" src="/public/img/{{user.photo}}.png" alt="">
+                        <span id="username">{{user.username}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="chat">
+
+                <div class="console">
+                    <div class="contact-header" id="chat-header"></div>
+                    <div class="messages" id="Messages"></div>
+                </div>
+                <div class="keyboard">
+                    <input type="text" name="" id="message-to-send" placeholder="Type a message" class="text-input">
+                    <input type="submit" value="Send" class="send-btn" onclick="sendMessage()">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/js/alert.js"></script>
+    <script src="/public/js/chat/render.js"></script>
+    <script src="/public/js/Chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/login.css">
+    <link rel="stylesheet" href="/public/css/alert.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="alert-div">
+        <div class="alert-container" id="alert-space">
+            <!-- <div class="alert-content">
+                <img src="public/img/warning.png" alt="">
+                <span>Erro ao enviar solicitação!</span>
+                <input type="submit" value="x">
+            </div>
+            <div class="timer"></div> -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="box">
+            <h1 class="app-title">ChatAPP</h1>
+            <div class="error" id="error-scope"></div>
+            <div>
+                <label for="" class="lable-input">Email: </label>
+                <input type="email" placeholder="" class="form-input" id="field-email">
+                <label for="" class="lable-input">Passowrd: </label>
+                <input type="password" placeholder="" class="form-input" id="field-password">
+                <div class="sub-div">
+                    <input type="submit" value="Login" class="login-btn" onclick="send()">
+                </div>
+                <p class="message-register">Are you not registred? <a href="">register now</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="/public/js/alert.js"></script>
+    <script src="/public/js/login.js"></script>
+</body>
+</html>
