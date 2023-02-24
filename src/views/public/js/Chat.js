@@ -121,7 +121,7 @@ async function getChat()
         }
     }
     
-    const url = `http://localhost:8080/chat/${chatID}`;
+    const url = `/chat/${chatID}`;
 
     const request = await fetch(url, {
         method: "POST"
@@ -192,23 +192,6 @@ async function saveOnLocalStorage(key, data)
 
 }
 
-async function someUpdate()
-{
-    const lastMessages = await getLastMessages();
-    const chatsData = new Array();
-    
-    
-    lastMessages.forEach((msg) => {
-        chatsData.push(msg);
-    })
-    
-    const request = await fetch("http://localhost:8080/chat/reaload", {
-        body: {
-            chats: chatsData
-        }
-    });
-}
-
 async function getLastMessages()
 {
 
@@ -251,7 +234,7 @@ async function acceptRequest(element, requestID)
 {
     if(!requestID) requestID = element.parentNode.parentNode.id;
 
-    const request = await fetch(`http://localhost:8080/chat/request`, {
+    const request = await fetch(`/chat/request`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -279,7 +262,7 @@ async function rejectRequest(element, requestID)
 {
     if(!requestID) requestID = element.parentNode.parentNode.id;
 
-    const request = await fetch(`http://localhost:8080/chat/request`, {
+    const request = await fetch(`/chat/request`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -304,7 +287,7 @@ async function cancelRequest(element, requestID)
 {
     if(!requestID) requestID = element.parentNode.parentNode.id;
 
-    const request = await fetch(`http://localhost:8080/chat/request`, {
+    const request = await fetch(`/chat/request`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -340,7 +323,7 @@ async function sendRequest()
 
     if(!username.value) return;
 
-    const request = await fetch(`http://localhost:8080/chat/request/send`, {
+    const request = await fetch(`/chat/request/send`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

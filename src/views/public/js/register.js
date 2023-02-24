@@ -5,7 +5,7 @@ async function register()
     const passwordField = document.getElementById('password');
     const confirmPasswordField = document.getElementById('confirm-password');
 
-    const request = await fetch('http://localhost:8080/auth/register/', {
+    const request = await fetch('/auth/register/', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'

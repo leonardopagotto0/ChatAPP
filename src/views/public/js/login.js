@@ -5,7 +5,7 @@ async function send()
     const email = document.getElementById('field-email').value;
     const password = document.getElementById('field-password').value;
 
-    const response = await fetch('http://localhost:8080/auth/', {
+    const response = await fetch('/auth/', {
         method: "POST",
         body: JSON.stringify({email, password}),
         headers: {
@@ -14,7 +14,7 @@ async function send()
     })
 
     if(response.redirected)
-    return window.location.replace("http://localhost:8080/chat/");
+    return window.location.replace("/chat/");
 
     const finalResponse = await response.json();
     if(finalResponse.httpStatusCode > 399) errorMessage(finalResponse.msg);

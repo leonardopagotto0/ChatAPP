@@ -1,6 +1,6 @@
 async function setPhoto(photoID) {
     
-    const request = await fetch('http://localhost:8080/user/set-photo', {
+    const request = await fetch('/user/set-photo', {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'
@@ -10,6 +10,6 @@ async function setPhoto(photoID) {
         })
     });
     
-    if(request.status == 204) return window.location.replace('http://localhost:8080/chat/');
+    if(request.status == 204) return window.location.replace('/chat/');
     console.log("ERROR_TO_SET");
 };
