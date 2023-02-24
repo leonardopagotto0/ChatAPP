@@ -23,6 +23,7 @@ var render =
     {
         let request_element = document.createElement('div');
         request_element.className = 'request'
+        request_element.id = requestID;
 
         let request_data_element = document.createElement('div');
         request_data_element.className = 'req-data'

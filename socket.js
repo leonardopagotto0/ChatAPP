@@ -25,6 +25,7 @@ async function socket(httpServer)
                 msg: "Not authenticated"
             }});
             socket.disconnect(true);
+            return;
         }
 
         socket.join(user.username);
@@ -57,7 +58,6 @@ async function socket(httpServer)
                 if(!chats) return;
                 chat.push(chats);
             }
-
             function userSelect()
             {
                 if(request.from != user.id){
@@ -71,15 +71,15 @@ async function socket(httpServer)
             toUser = userSelect();
             toUser = await userService.findById(toUser);
     
-            console.log(toUser);
             if(!toUser) return;
-
-            socket.to(toUser).emit('request event', {
+            
+            socket.to(toUser.username).emit('request event', {
                 requestID: req.requestID,
                 status: req.status,
+                from: user.username,
                 chat: {
                     id: chat[0]?.id,
-                    name: chat[0]?.name ?? user,
+                    name: user.username,
                     photo: chat[0]?.photo ?? user.photo,
                 }
             });

@@ -36,7 +36,20 @@ socket.on('request received', async function (req) {
     await render.request(req.requestID, {photoID: req.photo, username: req.from, sending: false});
 });
 socket.on('request event', async function (data) {
+    let request_element = document.getElementById(data.requestID);
     console.log(data);
+    if(data.status == "ACCEPT"){
+        await render.chatCart(data.chat.id, data.chat.name, data.chat.photo);
+        request_element.remove();
+    }
+    else if(data.status == "REJECT"){
+        alertRender(`${data.from} reject the request`, alertTypes.warning, {});
+        request_element.remove();
+    }else if(data.status == "CANCEL"){
+        request_element.remove();
+    }else{
+        return;
+    }
 });
 
 defineChats();
@@ -236,7 +249,7 @@ async function lastUpdate()
 
 async function acceptRequest(element, requestID)
 {
-    if(!requestID) requestID = element?.id;
+    if(!requestID) requestID = element.parentNode.parentNode.id;
 
     const request = await fetch(`http://localhost:8080/chat/request`, {
         method: 'PUT',
@@ -255,7 +268,7 @@ async function acceptRequest(element, requestID)
         element.parentNode.parentNode.remove();
         socket.emit('request event', {
             requestID,
-            status: 'ACCEPT',
+            status: 'ACCEPT'
         });
         return;
     }
@@ -264,7 +277,7 @@ async function acceptRequest(element, requestID)
 }
 async function rejectRequest(element, requestID)
 {
-    if(!requestID) requestID = element?.id;
+    if(!requestID) requestID = element.parentNode.parentNode.id;
 
     const request = await fetch(`http://localhost:8080/chat/request`, {
         method: 'PUT',
@@ -279,13 +292,17 @@ async function rejectRequest(element, requestID)
     if(request.status == 204) {
         await alertRender('Request rejected', alertTypes.success, {});
         element.parentNode.parentNode.remove();
+        socket.emit('request event', {
+            requestID,
+            status: 'REJECT'
+        });
     }
     
 }
 
 async function cancelRequest(element, requestID)
 {
-    if(!requestID) requestID = element?.id;
+    if(!requestID) requestID = element.parentNode.parentNode.id;
 
     const request = await fetch(`http://localhost:8080/chat/request`, {
         method: 'PUT',
@@ -299,6 +316,10 @@ async function cancelRequest(element, requestID)
     if(request.status == 204 || request.status == 200){
         alertRender('Success...', alertTypes.success, {time: 5000, animation: 1000});
         element.parentNode.parentNode.remove();
+        socket.emit('request event', {
+            requestID,
+            status: 'CANCEL'
+        });
         return
     }
 

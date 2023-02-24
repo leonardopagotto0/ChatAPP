@@ -370,3 +370,16 @@ body{
     background-color: rgb(100, 85, 114);
     cursor: pointer;
 }
+
+.chat-alert{
+    width: 100%;
+    text-align: center;
+}
+.chat-alert span{
+    display: flex;
+    justify-content: center;
+    color: white;
+    background-color: rgb(100, 85, 114);
+    padding: 10px;
+    border-radius: 100px;
+}

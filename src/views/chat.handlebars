@@ -53,14 +53,14 @@
                                 <div class="request-session-content" id="requestReceived">
                                     {{#each requests}}
                                         {{#ifDifferent from ../user.username}}
-                                            <div class="request">
+                                            <div class="request" id="{{id}}">
                                                 <div class="req-data">
                                                     <img src="/public/img/{{photoFrom}}.png" alt="">
                                                     <span>{{from}}</span>
                                                 </div>
                                                 <div class="opts">
-                                                    <input type="submit" value="ACCEPT" class="req-btn" id="{{id}}">
-                                                    <input type="submit" value="REJECT" class="req-btn" id="{{id}}">
+                                                    <input type="submit" value="ACCEPT" class="req-btn">
+                                                    <input type="submit" value="REJECT" class="req-btn">
                                                 </div>
                                             </div>
                                         {{else}}
@@ -77,13 +77,13 @@
                                 <div class="request-session-content" id="requestSent">
                                     {{#each requests}}
                                         {{#ifEqual from ../user.username}}
-                                            <div class="request">
+                                            <div class="request" id="{{id}}">
                                                 <div class="req-data">
                                                     <img src="/public/img/{{photoUsername}}.png" alt="">
                                                     <span>{{username}}</span>
                                                 </div>
                                                 <div class="opts">
-                                                    <input type="submit" value="CANCEL" id="{{id}}" class="cancel-request-btn">
+                                                    <input type="submit" value="CANCEL" class="cancel-request-btn">
                                                 </div>
                                             </div>
                                             {{else}}
